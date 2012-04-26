@@ -16,6 +16,7 @@ class ExceptionNotifier
       attr_writer :default_background_sections
       attr_writer :default_verbose_subject
       attr_writer :default_normalize_subject
+      attr_writer :default_smtp_settings
 
       def default_sender_address
         @default_sender_address || %("Exception Notifier" <exception.notifier@default.com>)
@@ -45,6 +46,10 @@ class ExceptionNotifier
         @default_normalize_prefix || false
       end
 
+      def default_smtp_settings
+        @default_smtp_settings || {}
+      end
+
       def default_options
         { :sender_address => default_sender_address,
           :exception_recipients => default_exception_recipients,
@@ -52,7 +57,8 @@ class ExceptionNotifier
           :sections => default_sections,
           :background_sections => default_background_sections,
           :verbose_subject => default_verbose_subject,
-          :normalize_subject => default_normalize_subject }
+          :normalize_subject => default_normalize_subject,
+          :default_smtp_settings => default_smtp_settings }
       end
 
       def normalize_digits(string)
